@@ -13,11 +13,14 @@ var option4 = document.getElementById("btn-3");
 
 // score related stuff
 var seeHighScore = document.getElementById("see-high-score");
+var submitInitialsBtn = document.getElementById("submit-initials-btn");
+var currentScore = document.getElementById("final-score");
 
 // time-related
-var timeLeft = document.getElementById("time-left");
+var timeLeft = document.getElementById("timer");
 var infoMsg = document.getElementById("info-msg");
 var timeZeroMsg = document.getElementById("time-zero-msg");
+var timer = document.getElementById("timer");
 
 // sections
 var introDiv = document.getElementById("intro");
@@ -33,18 +36,20 @@ function startQuiz() {
   
   questionIndexPos = 0;
   seconds = 20;
-  // timeLeft.innerHTML = seconds;
-
-  var timer = setInterval(function(){ 
-    if (seconds > 0)
+ 
+  var timeStart = setInterval(function() {
     seconds--;
-         document.getElementById("timer").innerHTML = "Time remaining: " + seconds;
-    if (seconds <= 0){
-      clearInterval(timer);
-      resultsDiv.classList.remove("hide");
-      quizDiv.classList.add("hide");  
-     }
-  }, 1000);  
+    timeLeft.innerHTML = "Time Left: " + seconds;
+    if(seconds <= 0) {
+      seconds = 0;
+        // clearInterval(timeStart);
+        if (questionIndexPos === questions.length) { 
+            timer.classList.add("hide"); 
+            clearInterval(timeStart);
+            quizEnd();
+        }
+    }
+},1000);
   showQuestions();
 }
 
@@ -62,7 +67,7 @@ function getQuestion(){
     option4.textContent = questions[questionIndexPos].choices[3];
   
 }
-var currentScore = 0;
+currentScore = 0;
 // let's check to see if they answered correctly and compare it to the 'answer' value in questions array
 
 function answerValid(answer){
@@ -70,17 +75,18 @@ function answerValid(answer){
       // questionsIndexPos should be iterating by 1 each time this runs
       // does selected answer match the actual one from array
       if (questions[questionIndexPos].answer === questions[questionIndexPos].choices[answer]) {
-        currentScore+=10;
+        currentScore+=10;      
         console.log('correct!')
         console.log(currentScore)
       } else {
         seconds-=10;
+        console.log('incorrect!')
       }
       questionIndexPos++;
-      if(questionIndexPos < questions.length - 1) {
+      if(questionIndexPos < questions.length) {
         getQuestion();
       } else {
-        timesUp();
+        quizEnd();
       }
 
 }
@@ -98,9 +104,24 @@ function selected4() { // selected4 sycned to event listener
   answerValid(3); // does the answer user chose match one saved in array
 } 
 
-function timesUp() {
+function quizEnd() {
   quizDiv.classList.add("hide");
   resultsDiv.classList.remove("hide");
+  // timer.classList.add("hide");
+  
+    document.getElementById("final-score").innerHTML = "Your final score is " + currentScore;
+    if (currentScore === 50){
+      document.getElementById("score-based-msg").innerHTML = "You're a JavaScript master!";
+    }
+    if (currentScore === 40){
+      document.getElementById("score-based-msg").innerHTML = "Great job! You're pretty knowledgable about JavaScript.";
+    } 
+    if (currentScore === 30){
+      document.getElementById("score-based-msg").innerHTML = "Decent job, but there's room for improvement.";
+    } 
+    if (currentScore <= 20){
+      document.getElementById("score-based-msg").innerHTML = "You can do better. Google is your friend!";
+    } 
 }
 
 // event listeners
@@ -111,6 +132,9 @@ function prepareEventHandlers() {
   option2.addEventListener("click", selected2);
   option3.addEventListener("click", selected3);
   option4.addEventListener("click", selected4);
+
+  // score related stuff
+  submitInitialsBtn.addEventListener("click", selected4);
 
 }
 //Questions to be asked
@@ -134,5 +158,5 @@ var questions = [
 }, {
   question: "A very useful tool used during development and debugging for printing content to the debugger is:",
   choices: ["1. localstorage.print()", "2. document.print()", "3. console.log()", "4. window.print()"],
-  answer: "2. document.print()"
+  answer: "3. console.log()"
 }]

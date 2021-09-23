@@ -19,9 +19,11 @@
             </div>
             <div id="timer" class="col text-right">
                 <span id="info-msg">Click Start Quiz to Start Timer</span>
-                <span id="time-zero-msg" class="hide">Time: <span id="time-left">0</span></span>
+                <span id="time-zero-msg" class="hide">
+                    <!-- Time: <span id="time-left">0</span> -->
+                </span>
             </div>
-            <div id="timeout" class="col text-right" style="display: none;">You ran out of time!</div>
+            <!-- <div id="timeout" class="col text-right hide" >You ran out of time!</div> -->
         </div>
 
         <div id="main" class="row text-left">
@@ -51,7 +53,9 @@
                     <div class="justify-content-center hide" id="results-section" >
                         <!-- <div class="col-2"></div> -->
                         <div class="col-8 text-left">
-                            <h2 class="">You're finished!<br />Your final score is <span id="finalScore"></span> !</h2>
+                            <h2 class="" >You're finished!</h2>
+                                <p id="final-score"></p>
+                                <p id="score-based-msg"></p>
                             <form>
                                 <p class="">Enter your initials: <input id="enter-initials" class="form-control pt-2 pb-3 mt-2" type="text">
                                 <button type="submit" id="submit-initials-btn" class="btn btn-info mt-3">Save my Score!</button>

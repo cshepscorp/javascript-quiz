@@ -6,19 +6,41 @@ var seeHighScore = document.getElementById("see-high-score");
 
 // time-related
 var timeLeft = document.getElementById("time-left");
+var infoMsg = document.getElementById("info-msg");
+var timeZeroMsg = document.getElementById("time-zero-msg");
 
 // sections
 var introDiv = document.getElementById("intro");
+var quizDiv = document.getElementById("quiz-section");
+var resultsDiv = document.getElementById("results-section");
 
-
+var seconds = 21;
 function startQuiz() {
-  start-msg.classList.add("hide");
-  time-zero-msg.classList.remove("hide");
+  infoMsg.classList.add("hide");
+  timeZeroMsg.classList.remove("hide");
+  introDiv.classList.add("hide");
+  quizDiv.classList.remove("hide");
+  
+  questionsLeft = 0;
+  seconds = 20;
+  // timeLeft.innerHTML = seconds;
 
-  quiz-section.classList.remove("hide");
-
+  var timer = setInterval(function(){ 
+    if (seconds > 0)
+    seconds--;
+         document.getElementById("timer").innerHTML = "Time remaining: " + seconds;
+    if (seconds <= 0){
+    // if (seconds <= 0 || questionsLeft == 0)
+    //  return window.location.assign("highscore.html");
+      clearInterval(timer);
+      resultsDiv.classList.remove("hide");
+      quizDiv.classList.add("hide");  
+     }
+  }, 1000);  
 }
-
+function timesUp() {
+  quizDiv.classList.remove("hide");
+}
 //Questions to be asked
 var questions = [
   {

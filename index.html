@@ -18,7 +18,7 @@
                 <a href="#" id="see-high-score">View Highscores</a>
             </div>
             <div id="timer" class="col text-right">
-                <span id="start-msg">Click Start Quiz to Start Timer</span>
+                <span id="info-msg">Click Start Quiz to Start Timer</span>
                 <span id="time-zero-msg" class="hide">Time: <span id="time-left">0</span></span>
             </div>
             <div id="timeout" class="col text-right" style="display: none;">You ran out of time!</div>
@@ -48,7 +48,7 @@
                   </div>
 
                   <!-- results section -->
-                    <div class="justify-content-center" id="summary" style="display: none;">
+                    <div class="justify-content-center hide" id="results-section" >
                         <!-- <div class="col-2"></div> -->
                         <div class="col-8 text-left">
                             <h2 class="">You're finished!<br />Your final score is <span id="finalScore"></span> !</h2>
@@ -59,10 +59,10 @@
                             </form>
                         </div>
                     <!-- <div class="col-2"></div> -->
-                </div>
+                    </div>
 
                 <!-- highscores section -->
-                <div id="highScoreDisplay" class="justify-content-center" style="display: none;">
+                <div id="highScoreDisplay" class="justify-content-center hide" >
                     <h2 class="">High Scores</h2>                   
                     
                     <div id="listOfHighScores" class="list-group list-group-flush pt-2 pb-3 mb-2"></div>

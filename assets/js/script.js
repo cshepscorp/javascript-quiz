@@ -1,5 +1,12 @@
-// gameplay
+// gameplay/ quiz stuff
 var startQuizBtn = document.getElementById("start-quiz-btn");
+var currentQuestion = document.getElementById("current-question");
+// buttons serving as quiz answer options
+var option1 = document.getElementById("btn-0");
+var option2 = document.getElementById("btn-1");
+var option3 = document.getElementById("btn-2");
+var option4 = document.getElementById("btn-3");
+
 
 // score related stuff
 var seeHighScore = document.getElementById("see-high-score");
@@ -37,6 +44,19 @@ function startQuiz() {
       quizDiv.classList.add("hide");  
      }
   }, 1000);  
+  showQuestions();
+}
+
+questionIndexPos = 0;
+function showQuestions(){
+  currentQuestion.textContent = questions[questionIndexPos].question;
+  // choice index position doesnt vary so index pos is set
+  option1.textContent = questions[questionIndexPos].choices[0];
+  option2.textContent = questions[questionIndexPos].choices[1];
+  option3.textContent = questions[questionIndexPos].choices[2];
+  option4.textContent = questions[questionIndexPos].choices[3];
+  // currentQuestion.textContent = "testing";
+
 }
 function timesUp() {
   quizDiv.classList.remove("hide");

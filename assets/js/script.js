@@ -1,3 +1,7 @@
+window.onload = function() {
+  prepareEventHandlers();
+}
+
 // gameplay/ quiz stuff
 var startQuizBtn = document.getElementById("start-quiz-btn");
 var currentQuestion = document.getElementById("current-question");
@@ -6,7 +10,6 @@ var option1 = document.getElementById("btn-0");
 var option2 = document.getElementById("btn-1");
 var option3 = document.getElementById("btn-2");
 var option4 = document.getElementById("btn-3");
-
 
 // score related stuff
 var seeHighScore = document.getElementById("see-high-score");
@@ -28,7 +31,7 @@ function startQuiz() {
   introDiv.classList.add("hide");
   quizDiv.classList.remove("hide");
   
-  questionsLeft = 0;
+  questionIndexPos = 0;
   seconds = 20;
   // timeLeft.innerHTML = seconds;
 
@@ -37,8 +40,6 @@ function startQuiz() {
     seconds--;
          document.getElementById("timer").innerHTML = "Time remaining: " + seconds;
     if (seconds <= 0){
-    // if (seconds <= 0 || questionsLeft == 0)
-    //  return window.location.assign("highscore.html");
       clearInterval(timer);
       resultsDiv.classList.remove("hide");
       quizDiv.classList.add("hide");  
@@ -47,19 +48,70 @@ function startQuiz() {
   showQuestions();
 }
 
-questionIndexPos = 0;
 function showQuestions(){
-  currentQuestion.textContent = questions[questionIndexPos].question;
-  // choice index position doesnt vary so index pos is set
-  option1.textContent = questions[questionIndexPos].choices[0];
-  option2.textContent = questions[questionIndexPos].choices[1];
-  option3.textContent = questions[questionIndexPos].choices[2];
-  option4.textContent = questions[questionIndexPos].choices[3];
-  // currentQuestion.textContent = "testing";
+    getQuestion();
+}
+
+function getQuestion(){
+
+    currentQuestion.textContent = questions[questionIndexPos].question;
+    // choice index position doesnt vary so index pos is set
+    option1.textContent = questions[questionIndexPos].choices[0];
+    option2.textContent = questions[questionIndexPos].choices[1];
+    option3.textContent = questions[questionIndexPos].choices[2];
+    option4.textContent = questions[questionIndexPos].choices[3];
+  
+}
+var currentScore = 0;
+// let's check to see if they answered correctly and compare it to the 'answer' value in questions array
+
+function answerValid(answer){
+  
+      // questionsIndexPos should be iterating by 1 each time this runs
+      // does selected answer match the actual one from array
+      if (questions[questionIndexPos].answer === questions[questionIndexPos].choices[answer]) {
+        currentScore+=10;
+        console.log('correct!')
+        console.log(currentScore)
+      } else {
+        seconds-=10;
+      }
+      questionIndexPos++;
+      if(questionIndexPos < questions.length - 1) {
+        getQuestion();
+      } else {
+        timesUp();
+      }
 
 }
+
+function selected1() { // selected1 sycned to event listener
+  answerValid(0); // does the answer user chose match one saved in array
+}
+function selected2() { // selected2 sycned to event listener
+  answerValid(1); // does the answer user chose match one saved in array
+} 
+function selected3() { // selected3 sycned to event listener
+  answerValid(2); // does the answer user chose match one saved in array
+} 
+function selected4() { // selected4 sycned to event listener
+  answerValid(3); // does the answer user chose match one saved in array
+} 
+
 function timesUp() {
-  quizDiv.classList.remove("hide");
+  quizDiv.classList.add("hide");
+  resultsDiv.classList.remove("hide");
+}
+
+// event listeners
+function prepareEventHandlers() {
+  startQuizBtn.addEventListener("click", startQuiz);
+  // when user selects an answer, run selected_ to check selected answer to actual answer
+  option1.addEventListener("click", selected1);
+  option2.addEventListener("click", selected2);
+  option3.addEventListener("click", selected3);
+  option4.addEventListener("click", selected4);
+
 }
 //Questions to be asked
 var questions = [
@@ -84,7 +136,3 @@ var questions = [
   choices: ["1. localstorage.print()", "2. document.print()", "3. console.log()", "4. window.print()"],
   answer: "2. document.print()"
 }]
-
-
-// event listeners
-startQuizBtn.addEventListener("click", startQuiz);

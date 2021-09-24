@@ -11,10 +11,17 @@ var option2 = document.getElementById("btn-1");
 var option3 = document.getElementById("btn-2");
 var option4 = document.getElementById("btn-3");
 
+var validationMsg = document.getElementById("validation-msg");
+
+var optionDiv = document.getElementById("options");
 // score related stuff
 var seeHighScore = document.getElementById("see-high-score");
 var submitInitialsBtn = document.getElementById("submit-initials-btn");
 var currentScore = document.getElementById("final-score");
+var initialInput = document.getElementById("enter-initials");
+var clearHighScores = document.getElementById("clear-high-scores-btn");
+
+var listOfHighScores = document.getElementById("high-score-list");
 
 // time-related
 var timeLeft = document.getElementById("timer");
@@ -26,6 +33,7 @@ var timer = document.getElementById("timer");
 var introDiv = document.getElementById("intro");
 var quizDiv = document.getElementById("quiz-section");
 var resultsDiv = document.getElementById("results-section");
+var highScoreDiv = document.getElementById("highscore-section");
 
 var seconds = 21;
 function startQuiz() {
@@ -43,9 +51,9 @@ function startQuiz() {
     if(seconds <= 0) {
       seconds = 0;
         // clearInterval(timeStart);
-        if (questionIndexPos === questions.length) { 
-            timer.classList.add("hide"); 
-            clearInterval(timeStart);
+        if (questionIndexPos === 4) {
+          
+          clearInterval(timeStart);
             quizEnd();
         }
     }
@@ -58,50 +66,57 @@ function showQuestions(){
 }
 
 function getQuestion(){
-
-    currentQuestion.textContent = questions[questionIndexPos].question;
-    // choice index position doesnt vary so index pos is set
-    option1.textContent = questions[questionIndexPos].choices[0];
-    option2.textContent = questions[questionIndexPos].choices[1];
-    option3.textContent = questions[questionIndexPos].choices[2];
-    option4.textContent = questions[questionIndexPos].choices[3];
   
+    var question = questions[questionIndexPos]['question'];
+    $("#current-question").text(question);
+
+    var opt1 = questions[questionIndexPos]['choices'][0];
+    $("#btn-0").text(opt1);
+
+    var opt2 = questions[questionIndexPos]['choices'][1];
+    $("#btn-1").text(opt2);
+
+    var opt3 = questions[questionIndexPos]['choices'][2];
+    $("#btn-2").text(opt3);
+
+    var opt4 = questions[questionIndexPos]['choices'][3];
+    $("#btn-3").text(opt4);
 }
 currentScore = 0;
-// let's check to see if they answered correctly and compare it to the 'answer' value in questions array
-
-function answerValid(answer){
+function newAnswerValid(answer){
   
-      // questionsIndexPos should be iterating by 1 each time this runs
-      // does selected answer match the actual one from array
-      if (questions[questionIndexPos].answer === questions[questionIndexPos].choices[answer]) {
-        currentScore+=10;      
-        console.log('correct!')
-        console.log(currentScore)
-      } else {
-        seconds-=10;
-        console.log('incorrect!')
-      }
-      questionIndexPos++;
-      if(questionIndexPos < questions.length) {
-        getQuestion();
-      } else {
-        quizEnd();
-      }
+  // questionsIndexPos should be iterating by 1 each time this runs
+  // does selected answer match the actual one from array
+  if (questions[questionIndexPos].answer === questions[questionIndexPos].choices[answer]) {
+    currentScore+=10;      
+    $("#validation-msg").append("Correct!");
+    
+    console.log('correct!')
+    console.log(currentScore)
+  } else {
+    seconds-=10;
+    console.log('incorrect!')
+    $("#validation-msg").text("Wrong!");
+  }
+  questionIndexPos++;
+  if(questionIndexPos < questions.length) {
+    getQuestion();
+  } else {
+    quizEnd();
+  }
 
 }
-
 function selected1() { // selected1 sycned to event listener
-  answerValid(0); // does the answer user chose match one saved in array
+  newAnswerValid(0); // does the answer user chose match one saved in array
 }
-function selected2() { // selected2 sycned to event listener
-  answerValid(1); // does the answer user chose match one saved in array
+function selected2() { 
+  newAnswerValid(1); 
 } 
-function selected3() { // selected3 sycned to event listener
-  answerValid(2); // does the answer user chose match one saved in array
+function selected3() { 
+  newAnswerValid(2); 
 } 
-function selected4() { // selected4 sycned to event listener
-  answerValid(3); // does the answer user chose match one saved in array
+function selected4() { 
+  newAnswerValid(3); 
 } 
 
 function quizEnd() {
@@ -124,6 +139,76 @@ function quizEnd() {
     } 
 }
 
+function setHighScores(event) {
+  event.preventDefault();
+  // if(submitInitialsBtn.value === "") {
+  //   alert("You need to enter your initials in order to save");
+  //   return;
+  // }
+  var highScoresSaved = localStorage.getItem("high scores");
+  var savedScores;
+
+  // if there are no saved scores, create array to save them
+  if(highScoresSaved === null) {
+    savedScores = [];
+  } else {
+    // use JSON.parse to allow array to save stringified values 
+    savedScores = JSON.parse(highScoresSaved);
+  }
+  var saveUserScore = {
+    initials: initialInput.value,
+    score: currentScore
+  };
+  console.log(saveUserScore);
+  savedScores.push(saveUserScore);
+
+  // use JSON.stringify to allow local storage to save values 
+  var savedScoresString = JSON.stringify(savedScores);
+  window.localStorage.setItem("high scores", savedScoresString)
+  console.log(savedScoresString);
+
+  displayHighScore();
+}
+
+function displayHighScore() {
+  timeLeft.classList.add("hide");
+  highScoreDiv.classList.remove("hide");
+  introDiv.classList.add("hide");
+  resultsDiv.classList.add("hide");
+  // get saved scores from LS
+  var highScoresSaved = localStorage.getItem("high scores");
+  console.log(typeof highScoresSaved); // string
+
+  // are there any scores saved in LS?
+  if (highScoresSaved === null) {
+    return;
+  }
+  console.log(highScoresSaved + " did this work");
+    
+  // Iterates over the 'list'
+  // 
+    // Creates a new variable 'toDoItem' that will hold a "<p>" tag
+    // Sets the `list` item's value as text of this <p> element
+    // var highScoreItem = $('<p>');
+    // highScoreItem.text(highScoresSaved[i]);
+    var highScoreListItems = JSON.parse(highScoresSaved);
+    console.log(typeof highScoreListItems); // object
+
+  
+    // for (var i = 0; i < highScoreListItems.length; i++) {
+    for (var i = 0; i < 5; i++) {
+      var eachNewHighScore = highScoreListItems[i]['initials'] + ": " + highScoreListItems[i]['score'] + "<br>";
+      $("#list-of-high-scores")
+        .append(eachNewHighScore);
+      
+    }
+  
+}
+
+function resetHighScores() {
+  window.localStorage.clear();
+}
+
 // event listeners
 function prepareEventHandlers() {
   startQuizBtn.addEventListener("click", startQuiz);
@@ -134,7 +219,8 @@ function prepareEventHandlers() {
   option4.addEventListener("click", selected4);
 
   // score related stuff
-  submitInitialsBtn.addEventListener("click", selected4);
+  submitInitialsBtn.addEventListener("click", setHighScores);
+  clearHighScores.addEventListener("click", resetHighScores);
 
 }
 //Questions to be asked

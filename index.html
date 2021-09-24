@@ -4,7 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>JavaScript Coding Quiz</title>
   </head>
@@ -18,7 +20,7 @@
                 <a href="#" id="see-high-score">View Highscores</a>
             </div>
             <div id="timer" class="col text-right">
-                <span id="info-msg">Click Start Quiz to Start Timer</span>
+                <span id="info-msg"><em>Click Start Quiz to Start Timer</em></span>
                 <span id="time-zero-msg" class="hide">
                     <!-- Time: <span id="time-left">0</span> -->
                 </span>
@@ -39,13 +41,13 @@
                   <!-- quiz section  -->
                   <div id="quiz-section" class="hide">
                     <p id="current-question" class="justify-content-center"></p>
-                    <div class="justify-content-center">
-                        <p><button id="btn-0" class="btn btn-dark"></button></p>
+                    <div class="justify-content-center" id="options">
+                        <p><button id="btn-0" class="btn btn-purple"></button></p>
                         <p><button id="btn-1" class="btn btn-dark"></button></p>
                         <p><button id="btn-2" class="btn btn-dark"></button></p>
                         <p><button id="btn-3" class="btn btn-dark"></button></p>
                         <hr id="line-break" style="display: none" class="mt-4">
-                        <p id="answer-check" style="display: none;"></p>
+                        <p id="validation-msg" class="font-italic"></p>
                     </div>
                   </div>
 
@@ -53,29 +55,29 @@
                     <div class="justify-content-center hide" id="results-section" >
                         <!-- <div class="col-2"></div> -->
                         <div class="col-8 text-left">
-                            <h2 class="" >You're finished!</h2>
+                            <h2 class="" >All done!</h2>
                                 <p id="final-score"></p>
                                 <p id="score-based-msg"></p>
                             <form>
                                 <p class="">Enter your initials: <input id="enter-initials" class="form-control pt-2 pb-3 mt-2" type="text">
-                                <button type="submit" id="submit-initials-btn" class="btn btn-info mt-3">Save my Score!</button>
+                                <button type="submit" maxlength="10" id="submit-initials-btn" class="btn btn-info mt-3">Save my Score!</button>
                                 </p>
+                                <hr id="line-break" style="display: none" class="mt-4">
+                                <p id="validation-msg" class="font-italic"></p>
                             </form>
                         </div>
                     <!-- <div class="col-2"></div> -->
                     </div>
 
                 <!-- highscores section -->
-                <div id="highScoreDisplay" class="justify-content-center hide" >
+                <div id="highscore-section" class="justify-content-center hide" >
                     <h2 class="">High Scores</h2>                   
-                    
-                    <div id="listOfHighScores" class="list-group list-group-flush pt-2 pb-3 mb-2"></div>
-
+                    <div id="list-of-high-scores" class="list-group list-group-flush pt-2 pb-3 mb-2"></div>
                     <!-- append each highscore as new paragraph here -->
-                    <p>
-                        <button type="submit" class="btn mr-3" id="go-back-btn">Go Back</button>
-                        <button type="submit" class="btn mr-3" id="clear-high-score-btn"><i class="fas fa-eraser"></i> Clear Highscores</button>
-                        <button type="submit" class="btn" id="play-again-btn" onclick="window.location.href='./index.html'"><i class="fas fa-arrow-left"></i> Play Again</button>
+                    <p id="#high-score-list">
+                        <button type="submit" class="btn" id="play-again-btn" onclick="window.location.href='./index.html'"><i class="fas fa-arrow-left"></i> Go back</button>
+                        <button type="submit" class="btn mr-3" id="clear-high-scores-btn"><i class="fas fa-eraser"></i> Clear Highscores</button>
+                        
                     </p>
                     
                 </div>

@@ -42,7 +42,7 @@
                   <div id="quiz-section" class="hide">
                     <p id="current-question" class="justify-content-center"></p>
                     <div class="justify-content-center" id="options">
-                        <p><button id="btn-0" class="btn btn-purple"></button></p>
+                        <p><button id="btn-0" class="btn btn-dark"></button></p>
                         <p><button id="btn-1" class="btn btn-dark"></button></p>
                         <p><button id="btn-2" class="btn btn-dark"></button></p>
                         <p><button id="btn-3" class="btn btn-dark"></button></p>
@@ -50,6 +50,16 @@
                         <p id="validation-msg" class="font-italic"></p>
                     </div>
                   </div>
+                  <!-- highscores section -->
+                    <div id="highscore-section" class="justify-content-center hide" >
+                        <h2 class="">High Scores</h2>                   
+                        <div id="list-of-high-scores" class="list-group list-group-flush pt-2 pb-3 mb-2"></div>
+                        <p id="#high-score-list">
+                            <button type="submit" class="btn" id="play-again-btn" onclick="window.location.href='./index.html'"><i class="fas fa-arrow-left"></i> Play Again</button>
+                            <button type="submit" class="btn mr-3" id="clear-high-scores-btn"><i class="fas fa-eraser"></i> Clear Highscores</button>
+                        </p>
+                        
+                    </div> 
 
                   <!-- results section -->
                     <div class="justify-content-center hide" id="results-section" >
@@ -68,19 +78,6 @@
                         </div>
                     <!-- <div class="col-2"></div> -->
                     </div>
-
-                <!-- highscores section -->
-                <div id="highscore-section" class="justify-content-center hide" >
-                    <h2 class="">High Scores</h2>                   
-                    <div id="list-of-high-scores" class="list-group list-group-flush pt-2 pb-3 mb-2"></div>
-                    <!-- append each highscore as new paragraph here -->
-                    <p id="#high-score-list">
-                        <button type="submit" class="btn" id="play-again-btn" onclick="window.location.href='./index.html'"><i class="fas fa-arrow-left"></i> Go back</button>
-                        <button type="submit" class="btn mr-3" id="clear-high-scores-btn"><i class="fas fa-eraser"></i> Clear Highscores</button>
-                        
-                    </p>
-                    
-                </div>
               </main>
             <div class="col-md-2"></div>
         </div>

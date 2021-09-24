@@ -35,38 +35,30 @@ var quizDiv = document.getElementById("quiz-section");
 var resultsDiv = document.getElementById("results-section");
 var highScoreDiv = document.getElementById("highscore-section");
 
-var seconds = 21;
+var seconds = 18;
 function startQuiz() {
   infoMsg.classList.add("hide");
   timeZeroMsg.classList.remove("hide");
   introDiv.classList.add("hide");
   quizDiv.classList.remove("hide");
-  
-  questionIndexPos = 0;
-  seconds = 20;
- 
+
   var timeStart = setInterval(function() {
     seconds--;
     timeLeft.innerHTML = "Time Left: " + seconds;
-    if(seconds <= 0) {
-      seconds = 0;
-        // clearInterval(timeStart);
-        if (questionIndexPos === 4) {
-          
-          clearInterval(timeStart);
-            quizEnd();
-        }
+    if(seconds <= 0 || questionIndexPos > 4) {
+      quizEnd();
+      clearInterval(timeStart);
     }
-},1000);
-  showQuestions();
+    },1000);
+    
+    showQuestions();
 }
-
+questionIndexPos = 0;
 function showQuestions(){
     getQuestion();
 }
 
 function getQuestion(){
-  
     var question = questions[questionIndexPos]['question'];
     $("#current-question").text(question);
 
@@ -81,6 +73,8 @@ function getQuestion(){
 
     var opt4 = questions[questionIndexPos]['choices'][3];
     $("#btn-3").text(opt4);
+
+    console.log("current index pos: " + questionIndexPos);
 }
 currentScore = 0;
 function newAnswerValid(answer){
@@ -89,7 +83,7 @@ function newAnswerValid(answer){
   // does selected answer match the actual one from array
   if (questions[questionIndexPos].answer === questions[questionIndexPos].choices[answer]) {
     currentScore+=10;      
-    $("#validation-msg").append("Correct!");
+    $("#validation-msg").text("Correct!");
     
     console.log('correct!')
     console.log(currentScore)
@@ -120,9 +114,10 @@ function selected4() {
 } 
 
 function quizEnd() {
+  
   quizDiv.classList.add("hide");
   resultsDiv.classList.remove("hide");
-  // timer.classList.add("hide");
+  // timeLeft.classList.add("hide");
   
     document.getElementById("final-score").innerHTML = "Your final score is " + currentScore;
     if (currentScore === 50){
@@ -137,10 +132,13 @@ function quizEnd() {
     if (currentScore <= 20){
       document.getElementById("score-based-msg").innerHTML = "You can do better. Google is your friend!";
     } 
+    
 }
 
 function setHighScores(event) {
+  
   event.preventDefault();
+  
   // if(submitInitialsBtn.value === "") {
   //   alert("You need to enter your initials in order to save");
   //   return;
@@ -174,6 +172,7 @@ function displayHighScore() {
   timeLeft.classList.add("hide");
   highScoreDiv.classList.remove("hide");
   introDiv.classList.add("hide");
+  seeHighScore.classList.add("hide");
   resultsDiv.classList.add("hide");
   // get saved scores from LS
   var highScoresSaved = localStorage.getItem("high scores");
@@ -192,21 +191,27 @@ function displayHighScore() {
     // var highScoreItem = $('<p>');
     // highScoreItem.text(highScoresSaved[i]);
     var highScoreListItems = JSON.parse(highScoresSaved);
+    console.log("after parsing")
     console.log(typeof highScoreListItems); // object
 
-  
-    // for (var i = 0; i < highScoreListItems.length; i++) {
-    for (var i = 0; i < 5; i++) {
-      var eachNewHighScore = highScoreListItems[i]['initials'] + ": " + highScoreListItems[i]['score'] + "<br>";
+    var sortedHighScores = highScoreListItems;
+    sortedHighScores.sort(function(a, b){return b.score - a.score});
+    sortedHighScores.splice(5,sortedHighScores.length);
+    console.log("after attempted sorting")
+    console.log(typeof sortedHighScores);
+    console.log(sortedHighScores);
+    for (var i = 0; i < sortedHighScores.length; i++) {
+      var eachNewHighScore = sortedHighScores[i]['initials'] + ": " + sortedHighScores[i]['score'] + "<br>";
       $("#list-of-high-scores")
         .append(eachNewHighScore);
-      
     }
-  
+    
 }
 
 function resetHighScores() {
+  // $('#list-of-high-scores').val('');
   window.localStorage.clear();
+  
 }
 
 // event listeners
@@ -221,6 +226,7 @@ function prepareEventHandlers() {
   // score related stuff
   submitInitialsBtn.addEventListener("click", setHighScores);
   clearHighScores.addEventListener("click", resetHighScores);
+  seeHighScore.addEventListener("click", displayHighScore);
 
 }
 //Questions to be asked

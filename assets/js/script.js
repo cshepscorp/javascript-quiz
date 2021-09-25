@@ -20,8 +20,9 @@ var submitInitialsBtn = document.getElementById("submit-initials-btn");
 var currentScore = document.getElementById("final-score");
 var initialInput = document.getElementById("enter-initials");
 var clearHighScores = document.getElementById("clear-high-scores-btn");
-
+var highScoreList = document.getElementById("list-of-high-scores");
 var listOfHighScores = document.getElementById("high-score-list");
+var paddingHighScores = document.getElementById("padding-high-scores");
 
 // time-related
 var timeLeft = document.getElementById("timer");
@@ -41,6 +42,8 @@ function startQuiz() {
   timeZeroMsg.classList.remove("hide");
   introDiv.classList.add("hide");
   quizDiv.classList.remove("hide");
+  // seeHighScore.classList.add("hide");
+  seeHighScore.innerHTML = '<a href="./index.html" >Exit Game</a>';
 
   var timeStart = setInterval(function() {
     seconds--;
@@ -53,29 +56,27 @@ function startQuiz() {
     
     showQuestions();
 }
+
 questionIndexPos = 0;
 function showQuestions(){
-    getQuestion();
+  var question = questions[questionIndexPos]['question'];
+  $("#current-question").text(question);
+
+  var opt1 = questions[questionIndexPos]['choices'][0];
+  $("#btn-0").text(opt1);
+
+  var opt2 = questions[questionIndexPos]['choices'][1];
+  $("#btn-1").text(opt2);
+
+  var opt3 = questions[questionIndexPos]['choices'][2];
+  $("#btn-2").text(opt3);
+
+  var opt4 = questions[questionIndexPos]['choices'][3];
+  $("#btn-3").text(opt4);
+
+  console.log("current index pos: " + questionIndexPos);
 }
 
-function getQuestion(){
-    var question = questions[questionIndexPos]['question'];
-    $("#current-question").text(question);
-
-    var opt1 = questions[questionIndexPos]['choices'][0];
-    $("#btn-0").text(opt1);
-
-    var opt2 = questions[questionIndexPos]['choices'][1];
-    $("#btn-1").text(opt2);
-
-    var opt3 = questions[questionIndexPos]['choices'][2];
-    $("#btn-2").text(opt3);
-
-    var opt4 = questions[questionIndexPos]['choices'][3];
-    $("#btn-3").text(opt4);
-
-    console.log("current index pos: " + questionIndexPos);
-}
 currentScore = 0;
 function newAnswerValid(answer){
   
@@ -83,7 +84,9 @@ function newAnswerValid(answer){
   // does selected answer match the actual one from array
   if (questions[questionIndexPos].answer === questions[questionIndexPos].choices[answer]) {
     currentScore+=10;      
-    $("#validation-msg").text("Correct!");
+    $("#validation-msg")
+      .text("Correct!")
+      .addClass("div-line");
     
     console.log('correct!')
     console.log(currentScore)
@@ -94,12 +97,12 @@ function newAnswerValid(answer){
   }
   questionIndexPos++;
   if(questionIndexPos < questions.length) {
-    getQuestion();
+    showQuestions();
   } else {
     quizEnd();
   }
-
 }
+
 function selected1() { // selected1 sycned to event listener
   newAnswerValid(0); // does the answer user chose match one saved in array
 }
@@ -114,10 +117,8 @@ function selected4() {
 } 
 
 function quizEnd() {
-  
   quizDiv.classList.add("hide");
   resultsDiv.classList.remove("hide");
-  // timeLeft.classList.add("hide");
   
     document.getElementById("final-score").innerHTML = "Your final score is " + currentScore;
     if (currentScore === 50){
@@ -136,13 +137,8 @@ function quizEnd() {
 }
 
 function setHighScores(event) {
-  
   event.preventDefault();
-  
-  // if(submitInitialsBtn.value === "") {
-  //   alert("You need to enter your initials in order to save");
-  //   return;
-  // }
+
   var highScoresSaved = localStorage.getItem("high scores");
   var savedScores;
 
@@ -182,26 +178,18 @@ function displayHighScore() {
   if (highScoresSaved === null) {
     return;
   }
-  console.log(highScoresSaved + " did this work");
     
-  // Iterates over the 'list'
-  // 
-    // Creates a new variable 'toDoItem' that will hold a "<p>" tag
-    // Sets the `list` item's value as text of this <p> element
-    // var highScoreItem = $('<p>');
-    // highScoreItem.text(highScoresSaved[i]);
     var highScoreListItems = JSON.parse(highScoresSaved);
     console.log("after parsing")
     console.log(typeof highScoreListItems); // object
 
+    // sort high scores
     var sortedHighScores = highScoreListItems;
     sortedHighScores.sort(function(a, b){return b.score - a.score});
-    sortedHighScores.splice(5,sortedHighScores.length);
-    console.log("after attempted sorting")
-    console.log(typeof sortedHighScores);
+
     console.log(sortedHighScores);
-    for (var i = 0; i < sortedHighScores.length; i++) {
-      var eachNewHighScore = sortedHighScores[i]['initials'] + ": " + sortedHighScores[i]['score'] + "<br>";
+    for (var i = 0; i < 5; i++) {
+      var eachNewHighScore = "•  " + sortedHighScores[i]['initials'] + ": " + sortedHighScores[i]['score'] + "<br>";
       $("#list-of-high-scores")
         .append(eachNewHighScore);
     }
@@ -209,9 +197,9 @@ function displayHighScore() {
 }
 
 function resetHighScores() {
-  // $('#list-of-high-scores').val('');
   window.localStorage.clear();
-  
+  highScoreList.classList.add("hide");
+  paddingHighScores.classList.remove("hide");
 }
 
 // event listeners

@@ -2,18 +2,47 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: font-family: 'Rubik', sans-serif;
+  font-family: 'Rubik', sans-serif;
 }
+
 .btn-green {
-  
   color: #fff;
-  background-color: #228B22;
+  background-color: #454B1B;
+  border-color: #023020;
 }
 
 .btn-green:hover {
   color: #000;
   background-color: #B2AC88;
+}
 
+.div-line {
+  border-top: grey 1px dotted;
+  padding-top: 8px;
+}
+
+.relative {
+  position: relative;
+}
+
+.inits {
+  width: 65%; 
+  padding-right: 40px;
+}
+
+.inline-btn {
+
+    position: absolute;
+    top: 16px;
+    right: 0;
+    padding: 12px;
 }
 
 .hide { display: none;}
+
+@media screen and (max-width:575px) {
+  .inits {
+    width: 50%; 
+    padding-right: 40px;
+  }
+}

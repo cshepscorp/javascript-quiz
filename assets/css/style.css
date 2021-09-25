@@ -2,14 +2,18 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: font-family: 'Rubik', sans-serif;
 }
-
-btn-purple {
+.btn-green {
   
   color: #fff;
-  background-color: rgb(192, 192, 192);
-  border-color: #343a40;
+  background-color: #228B22;
+}
+
+.btn-green:hover {
+  color: #000;
+  background-color: #B2AC88;
+
 }
 
 .hide { display: none;}

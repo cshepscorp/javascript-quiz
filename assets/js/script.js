@@ -35,7 +35,7 @@ var quizDiv = document.getElementById("quiz-section");
 var resultsDiv = document.getElementById("results-section");
 var highScoreDiv = document.getElementById("highscore-section");
 
-var seconds = 18;
+var seconds = 45;
 function startQuiz() {
   infoMsg.classList.add("hide");
   timeZeroMsg.classList.remove("hide");

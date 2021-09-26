@@ -29,21 +29,21 @@
         </div>
         <div id="main" class="row text-left">
             <div class="col-md-2"></div>
-              <main class="col-md-8 mt-5">
+              <div class="col-md-8 mt-5">
                   <!--intro screen  -->
                   <div id="intro" class="justify-content-center">
                       <h1 class="mb-3">Coding Quiz Challenge</h1>
                       <p class="mb-4">Answer the following JavaScript related questions. Keep an eye on the timer in the top right-hand corner and keep in mind that wrong answers take 10 seconds off your timer!</p>
-                      <button type="button" id="start-quiz-btn" class="btn btn-info btn-green ml-auto align-center">Start Quiz</button>
+                      <button type="button" id="start-quiz-btn" class="btn btn-info ml-auto align-center">Start Quiz</button>
                   </div>
                   <!-- quiz section  -->
                   <div id="quiz-section" class="hide">
                     <h3 id="current-question" class="justify-content-center mb-3"></h3>
                     <div class="justify-content-center" id="options">
-                        <button id="btn-0" class="btn btn-dark btn-green mb-2 questions"></button>
-                        <button id="btn-1" class="btn btn-dark btn-green mb-2 questions"></button>
-                        <button id="btn-2" class="btn btn-dark btn-green mb-2 questions"></button>
-                        <button id="btn-3" class="btn btn-dark btn-green mb-2 questions"></button>
+                        <button id="btn-0" class="btn btn-dark mb-2 choices"></button>
+                        <button id="btn-1" class="btn btn-dark mb-2 choices"></button>
+                        <button id="btn-2" class="btn btn-dark mb-2 choices"></button>
+                        <button id="btn-3" class="btn btn-dark mb-2 choices"></button>
                         <p id="validation-msg" class="font-italic"></p>
                     </div>
                   </div>
@@ -57,7 +57,7 @@
                             <p id="score-based-msg"></p>
                         <form class="relative">Enter your initials: 
                             <p><input id="enter-initials" class="form-control pt-2 pb-3 mt-2 inits" type="text">
-                                <button type="submit" maxlength="10" id="submit-initials-btn" class="btn btn-info btn-green mt-3 inline-btn">Save my Score!</button>
+                                <button type="submit" maxlength="10" id="submit-initials-btn" class="btn btn-info mt-3 inline-btn">Save my Score!</button>
                             </p>
                             <!-- let user know if they got the answer correct or not -->
                             <p id="validation-msg" class="font-italic"></p>
@@ -67,17 +67,17 @@
                   <!-- highscores section -->
                     <div id="highscore-section" class="justify-content-center hide" >
                         <h2 class="">High Scores</h2>                   
-                        <ol id="list-of-high-scores" class="list-group list-group-flush p-3 mb-2"></ol>
+                        <ol id="list-of-high-scores" class="list-group list-group-flush p-4 mb-2"></ol>
                         <!-- adds some space when user clears highscores -->
                         <div id="padding-high-scores" class="pt-2 pb-3 hide"></div>
                         <p id="#high-score-list">
-                            <button type="submit" class="btn btn-green" id="play-again-btn" onclick="window.location.href='./index.html'"><i class="fas fa-arrow-left"></i> Play Again</button>
-                            <button type="submit" class="btn btn-green mr-3" id="clear-high-scores-btn"><i class="fas fa-eraser"></i> Clear Highscores</button>
+                            <button type="submit" class="btn btn-info" id="play-again-btn" onclick="window.location.href='./index.html'"><i class="fas fa-arrow-left"></i> Play Again</button>
+                            <button type="submit" class="btn btn-info mr-3" id="clear-high-scores-btn"><i class="fas fa-eraser"></i> Clear Highscores</button>
                         </p>
                     </div> 
                   
-              </main>
-            <div class="col-md-2"></div>
+                </div>
+            <!-- <div class="col-md-2"></div> -->
         </div>
     </div>
 

@@ -59,6 +59,7 @@ function startQuiz() {
 
 questionIndexPos = 0;
 function showQuestions(){
+  
   var question = questions[questionIndexPos]['question'];
   $("#current-question").text(question);
 

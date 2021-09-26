@@ -188,11 +188,6 @@ function displayHighScore() {
     sortedHighScores.sort(function(a, b){return b.score - a.score});
 
     console.log(sortedHighScores);
-    // for (var i = 0; i < 5; i++) {
-    //   var eachNewHighScore = "•  " + sortedHighScores[i]['initials'] + ": " + sortedHighScores[i]['score'] + "<br>";
-    //   $("#list-of-high-scores")
-    //     .append(eachNewHighScore);
-    // }
 
     for (var i = 0; i < 5; i++) {
       var eachNewHighScore = $('<li>');

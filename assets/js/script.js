@@ -154,6 +154,10 @@ function setHighScores(event) {
     initials: initialInput.value,
     score: currentScore
   };
+  if (!saveUserScore.initials) {
+      alert("Please enter a name");
+      return;
+  }
   console.log(saveUserScore);
   savedScores.push(saveUserScore);
 

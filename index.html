@@ -21,7 +21,7 @@
                 <a href="#" id="see-high-score">View Highscores</a>
             </div>
             <div id="timer" class="col text-right">
-                <p id="info-msg"><em>Click Start Quiz to Start Timer</em></p>
+                <p id="info-msg"><em><span class="hide-mobi">Click Start Quiz Button to Start Timer</span></em></p>
                 <p id="time-zero-msg" class="hide"></p>
                 </span>
             </div>
@@ -40,10 +40,10 @@
                   <div id="quiz-section" class="hide">
                     <h3 id="current-question" class="justify-content-center mb-3"></h3>
                     <div class="justify-content-center" id="options">
-                        <p><button id="btn-0" class="btn btn-dark btn-green"></button></p>
-                        <p><button id="btn-1" class="btn btn-dark btn-green"></button></p>
-                        <p><button id="btn-2" class="btn btn-dark btn-green"></button></p>
-                        <p><button id="btn-3" class="btn btn-dark btn-green"></button></p>
+                        <button id="btn-0" class="btn btn-dark btn-green mb-2 questions"></button>
+                        <button id="btn-1" class="btn btn-dark btn-green mb-2 questions"></button>
+                        <button id="btn-2" class="btn btn-dark btn-green mb-2 questions"></button>
+                        <button id="btn-3" class="btn btn-dark btn-green mb-2 questions"></button>
                         <p id="validation-msg" class="font-italic"></p>
                     </div>
                   </div>
@@ -67,7 +67,7 @@
                   <!-- highscores section -->
                     <div id="highscore-section" class="justify-content-center hide" >
                         <h2 class="">High Scores</h2>                   
-                        <div id="list-of-high-scores" class="list-group list-group-flush pt-2 pb-3 mb-2"></div>
+                        <ol id="list-of-high-scores" class="list-group list-group-flush pt-2 pb-3 mb-2"></ol>
                         <!-- adds some space when user clears highscores -->
                         <div id="padding-high-scores" class="pt-2 pb-3 hide"></div>
                         <p id="#high-score-list">

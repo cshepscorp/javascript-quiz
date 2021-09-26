@@ -5,6 +5,9 @@
   font-family: 'Rubik', sans-serif;
 }
 
+.questions {
+  display: block;
+}
 .btn-green {
   color: #fff;
   background-color: #454B1B;
@@ -14,6 +17,12 @@
 .btn-green:hover {
   color: #000;
   background-color: #B2AC88;
+}
+
+.btn-green:active {
+  color: #fff;
+  background-color: #454B1B;
+  border-color: #023020;
 }
 
 .div-line {
@@ -31,7 +40,6 @@
 }
 
 .inline-btn {
-
     position: absolute;
     top: 16px;
     right: 0;
@@ -44,5 +52,8 @@
   .inits {
     width: 50%; 
     padding-right: 40px;
+  }
+  .hide-mobi {
+    display: none;
   }
 }

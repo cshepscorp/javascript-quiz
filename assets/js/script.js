@@ -3,38 +3,38 @@ window.onload = function() {
 }
 
 // gameplay/ quiz stuff
-var startQuizBtn = document.getElementById("start-quiz-btn");
-var currentQuestion = document.getElementById("current-question");
+var startQuizBtn = document.querySelector("#start-quiz-btn");
+var currentQuestion = document.querySelector("#current-question");
 // buttons serving as quiz answer options
-var option1 = document.getElementById("btn-0");
-var option2 = document.getElementById("btn-1");
-var option3 = document.getElementById("btn-2");
-var option4 = document.getElementById("btn-3");
+var option1 = document.querySelector("#btn-0");
+var option2 = document.querySelector("#btn-1");
+var option3 = document.querySelector("#btn-2");
+var option4 = document.querySelector("#btn-3");
 
-var validationMsg = document.getElementById("validation-msg");
+var validationMsg = document.querySelector("#validation-msg");
 
-var optionDiv = document.getElementById("options");
+var optionDiv = document.querySelector("#options");
 // score related stuff
-var seeHighScore = document.getElementById("see-high-score");
-var submitInitialsBtn = document.getElementById("submit-initials-btn");
-var currentScore = document.getElementById("final-score");
-var initialInput = document.getElementById("enter-initials");
-var clearHighScores = document.getElementById("clear-high-scores-btn");
-var highScoreList = document.getElementById("list-of-high-scores");
-var listOfHighScores = document.getElementById("high-score-list");
-var paddingHighScores = document.getElementById("padding-high-scores");
+var seeHighScore = document.querySelector("#see-high-score");
+var submitInitialsBtn = document.querySelector("#submit-initials-btn");
+var currentScore = document.querySelector("#final-score");
+var initialInput = document.querySelector("#enter-initials");
+var clearHighScores = document.querySelector("#clear-high-scores-btn");
+var highScoreList = document.querySelector("#list-of-high-scores");
+var listOfHighScores = document.querySelector("#high-score-list");
+var paddingHighScores = document.querySelector("#padding-high-scores");
 
 // time-related
-var timeLeft = document.getElementById("timer");
-var infoMsg = document.getElementById("info-msg");
-var timeZeroMsg = document.getElementById("time-zero-msg");
-var timer = document.getElementById("timer");
+var timeLeft = document.querySelector("#timer");
+var infoMsg = document.querySelector("#info-msg");
+var timeZeroMsg = document.querySelector("#time-zero-msg");
+var timer = document.querySelector("#timer");
 
 // sections
-var introDiv = document.getElementById("intro");
-var quizDiv = document.getElementById("quiz-section");
-var resultsDiv = document.getElementById("results-section");
-var highScoreDiv = document.getElementById("highscore-section");
+var introDiv = document.querySelector("#intro");
+var quizDiv = document.querySelector("#quiz-section");
+var resultsDiv = document.querySelector("#results-section");
+var highScoreDiv = document.querySelector("#highscore-section");
 
 var seconds = 45;
 function startQuiz() {
